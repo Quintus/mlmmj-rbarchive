@@ -156,16 +156,11 @@ html
   <div id="header">
    <%= header %>
   </div>
-  <div id="topnav">
-   <a href="/">home</a>
-   |
-   <a href="..">month and year index</a>
-   |
-   <a href="$TIDXFNAME$#$MSGNUM$">thread index</a>
-   |
-   <a href="$IDXFNAME$#$MSGNUM$">date index</a>
-   |
-   <a href="<%= searchtarget %>">search</a>
+  <div id="toplinks">
+  $BUTTON(PREV)$ $BUTTON(NEXT)$ $BUTTON(TPREV)$ $BUTTON(TNEXT)$ [<a
+  href="$IDXFNAME$#$MSGNUM$">Date Index</a>] [<a
+  href="$TIDXFNAME$#$MSGNUM$">Thread Index</a>] [<a
+  href="<%= searchtarget %>">Search</a>]
   </div>
  </div>
  <div id="mailinglists">
@@ -265,15 +260,15 @@ html
     <%= header %>
   </div>
   <div id="topnav">
-   <a href="/">home</a>
+   <a href="/">Home</a>
    |
-   <a href="..">month and year index</a>
+   <a href="..">Month and Year Index</a>
    |
-   <a href="$TIDXFNAME$">thread index</a>
+   <a href="$TIDXFNAME$">Thread Index</a>
    |
-   <a href="$IDXFNAME$">date index</a>
+   <a href="$IDXFNAME$">Date Index</a>
    |
-   <a href="<%= searchtarget %>">search</a>
+   <a href="<%= searchtarget %>">Search</a>
   </div>
  </div>
  <div id="mailinglists">
@@ -316,15 +311,15 @@ html
     <%= header %>
   </div>
   <div id="topnav">
-   <a href="/">home</a>
+   <a href="/">Home</a>
    |
-   <a href="..">month and year index</a>
+   <a href="..">Month and Year Index</a>
    |
-   <a href="$TIDXFNAME$">thread index</a>
+   <a href="$TIDXFNAME$">Thread Index</a>
    |
-   <a href="$IDXFNAME$">date index</a>
+   <a href="$IDXFNAME$">Date Index</a>
    |
-   <a href="<%= searchtarget %>">search</a>
+   <a href="<%= searchtarget %>">Search</a>
   </div>
  </div>
  <div id="mailinglists">
@@ -448,3 +443,7 @@ html
 <FieldsEnd>
 </ul>
 </FieldsEnd>
+
+<TopLinks>
+<div></div>
+</TopLinks>
