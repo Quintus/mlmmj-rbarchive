@@ -135,7 +135,7 @@ class Archiver
 
     debug "Generating MhonArc RC file at #{rcpath}"
 
-    header         = @rc_args[:headers]
+    header         = @rc_args[:header]
     tlevels        = @rc_args[:tlevels]
     archiveadmin   = @rc_args[:archiveadmin]
     checknoarchive = @rc_args[:checknoarchive] ? "<CHECKNOARCHIVE>" : "<CHECKNOARCHIVE>\n<NOCHECKNOARCHIVE>"
