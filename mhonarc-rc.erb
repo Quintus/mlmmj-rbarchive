@@ -369,17 +369,17 @@ html
 <!--                                                                    -->
 
 <FOLUPBEGIN>
-<div id="followups">
-<table>
- <caption>Follow-Ups:</caption>
+<div class="followups">
+<h2>Followups:</h2>
+<ul>
 </FOLUPBEGIN>
- 
+
 <FOLUPLITXT>
- <tr><td>$SUBJECT$</td><td>$FROM$</td></tr>
+<li><strong>$SUBJECT$</strong> (<em>$FROM$</em>)</li>
 </FOLUPLITXT>
 
 <FOLUPEND>
-</table>
+</ul>
 </div>
 </FOLUPEND>
 
@@ -397,17 +397,17 @@ html
 <!--                                                                    -->
 
 <REFSBEGIN>
-<div id="references">
-<table>
- <caption>References:</caption>
+<div class="references">
+<h2>References:</h2>
+<ul>
 </REFSBEGIN>
- 
+
 <REFSLITXT>
- <tr><td>$SUBJECT$</td><td>$FROM$</td></tr>
+<li><strong>$SUBJECT$</strong> (<em>$FROM$</em>)</li>
 </REFSLITXT>
 
 <REFSEND>
-</table>
+</ul>
 </div>
 </REFSEND>
 
@@ -420,14 +420,6 @@ html
  
 <SUBJECTHEADER>
 <h1>$SUBJECTNA$</h1>
-<div id="toplinks">
- <div id="threadtoplinks">
-  $BUTTON(TPREV)$ | $BUTTON(TNEXT)$
- </div>
- <div id="datetoplinks">
-  $BUTTON(PREV)$ | $BUTTON(NEXT)$
- </div>
-</div>
 </SUBJECTHEADER>
 
 <!-- Thread element -->
@@ -446,3 +438,13 @@ html
 <li><strong>$SUBJECT$</strong>,
 <em>$FROMNAME$</em>, $MSGLOCALDATE(CUR;%d.%m %H:%M)$
 </TSingleTxt>
+
+<!-- ------------------------------------------------------------------ -->
+
+<FieldsBeg>
+<ul class="message-headers">
+</FieldsBeg>
+
+<FieldsEnd>
+</ul>
+</FieldsEnd>
