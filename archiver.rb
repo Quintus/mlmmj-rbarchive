@@ -178,6 +178,33 @@ class Archiver
     end
   end
 
+  # Search the given mailinglist for a specific search term.
+  # Return value is an array of paths relative to the HTML
+  # directory of the given ML. +query+ may be a regular
+  # expression or simply a string to check for.
+  def search(mlname, query)
+    html_dir = @target_dir + mlname
+
+    results = []
+    html_dir.find do |path|
+      next unless path.file?
+      next unless path.basename.to_s =~ /^\d+\.html$/
+
+      # Check if the file content matches
+      content = File.read(path)
+      if query.kind_of?(Regexp)
+        result = content =~ query
+      else
+        result = content.downcase.include?(query.downcase)
+      end
+
+      # If it did, remember it for returning
+      results << path.relative_path_from(html_dir) if result
+    end
+
+    results
+  end
+
   private
 
   # [header ("<p>ML archive</p>")]
