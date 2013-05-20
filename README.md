@@ -24,7 +24,8 @@ require "archiver"
 # or
 require_relative "./archiver"
 
-a = Archiver.new("output" # Target directory for all the messages
+a = Archiver.new("mailcache", # Cache directory for mails sorted by month for easier processing
+                 "output", # Target directory for all the messages
                  header: "<p>My ML archive</p>", # HTML to display at the top
                  searchtarget: "/my-search", # Link target for the "search" link
                  stylefile: "/stylesheets/archive.css") # CSS stylesheet to reference from the HTML files
@@ -43,6 +44,14 @@ manually. Next, create an empty file `my-ml/control/webarchive`. This
 signals mlmmj-rbarchive that you really want this ML to be processed;
 without this file, the directory is skipped even though you have added
 it to the archiver.
+
+You can now preprocess the mails into a hierarchical year-month
+directory structure so that before the messages get passed to MHonArc
+they are already nicely sorted:
+
+~~~~~~~~~~~~~~~~~~~~~~~ ruby
+a.preprocess_mlmmj_mails!
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Finally, start the conversion process:
 

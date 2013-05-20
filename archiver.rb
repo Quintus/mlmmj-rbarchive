@@ -27,6 +27,13 @@ require "mail"
 # archive under, add some MLs to process and start the process via #archive!.
 # You have some influence over the used (temporary) MHonArc RC file by specifying
 # some arguments to ::new.
+#
+# Note that archiving for the web is a two-step process. First the mails in
+# mlmmj’s +archive+ folder need to be split up in a directory structure that
+# allows processesing them month-by-month instead of processing them all at once,
+# because this allows for an easier overview of the web archive. In the second
+# step, all these month directories are passed into +mhonarc+, which converts
+# them to HTML and stores them in the final directory.
 class Archiver
 
   # Path relative to ML root containing the mails
@@ -48,8 +55,10 @@ class Archiver
   # Template for generating the temporary MHonArc RC file.
   MRC_TEMPLATE = ERB.new(File.read(File.join(File.expand_path(File.dirname(__FILE__)), "mhonarc-rc.erb")))
 
-  # Create a new Archiver that stores its mails below
-  # the given +target+ directory. +rc_args+ allows
+  # Create a new Archiver that stores its HTML mails below
+  # the given +target+ directory. The mlmmj mail archive
+  # is split into a year-month directory structure previously
+  # inside +sorted_mail_target. +rc_args+ allows
   # the customization of the used MHonArc RC file.
   # It is a hash that takes the following arguments
   # (the values in parentheses denote the default values)
@@ -67,7 +76,8 @@ class Archiver
   #   Target for the "search" link.
   # [stylefile ("/archive.css")]
   #   CSS style file to reference from the outputted HTML pages.
-  def initialize(target, rc_args = {})
+  def initialize(sorted_mail_target, target, rc_args = {})
+    @sorted_target = Pathname.new(sorted_mail_target).expand_path
     @target_dir   = Pathname.new(target).expand_path
     @mailinglists = []
     @mutex        = Mutex.new
@@ -99,6 +109,17 @@ class Archiver
     self
   end
 
+  # Iterates over all mailinglists and copies new messages into
+  # the intermediate month directory structure.
+  def preprocess_mlmmj_mails!
+    @sorted_target.mkpath unless @sorted_target.directory?
+
+    @mailinglists.each do |path|
+      hsh = collect_messages(path + ARCHIVE_DIR)
+      split_messages_into_month_dirs(hsh, @sorted_target + path.basename) # path.basename is the ML name
+    end
+  end
+
   # Process all the mails in all the directories.
   def archive!
     @mutex.synchronize do
@@ -108,12 +129,13 @@ class Archiver
         control_file = path + CONTROL_FILE
         next unless control_file.file?
 
-        process_ml(path + ARCHIVE_DIR, @target_dir + path.basename, rcpath)
+        process_ml(@sorted_target + path.basename, @target_dir + path.basename, rcpath)
       end
     end
   end
 
   private
+
   # [header ("<p>ML archive</p>")]
   #   HTML header to prepend to every page. $IDXTITLE$ is replaced
   #   by the title of the respective index.
@@ -148,21 +170,17 @@ class Archiver
     rcpath
   end
 
-  # Process all mails in +mail_dir+ and output an HTML
+  # Process all mails in +sorted_mail_dir+ and output an HTML
   # directory structure in +archive_dir+. +rcpath+ is the
   # path to an MHonArc RC file to use.
-  def process_ml(mail_dir, archive_dir, rcpath)
-    debug "Processing ML directory #{mail_dir} ===> #{archive_dir}"
+  def process_ml(sorted_mail_dir, archive_dir, rcpath)
+    debug "Processing sorted ML directory #{sorted_mail_dir} ===> #{archive_dir}"
 
     # Create the target directory
     archive_dir.mkpath unless archive_dir.directory?
 
-    # Prepare the mails
-    result     = collect_messages(mail_dir)
-    target_dir = split_messages_into_month_dirs(result)
-
-    # Let mhonarc process them
-    target_dir.each_child do |yeardir|
+    # Let mhonarc process the messages
+    sorted_mail_dir.each_child do |yeardir|
       yeardir.each_child do |monthdir|
         mhonarc(monthdir, archive_dir + sprintf("%04d/%02d", yeardir.basename.to_s.to_i, monthdir.basename.to_s.to_i), rcpath)
       end
@@ -187,7 +205,7 @@ class Archiver
   end
 
   # Takes the result of #collect_messages and writes the messages
-  # out to a directory structure like this:
+  # out to a directory structure under +target+ like this:
   #   2013/
   #     1/
   #       msg1
@@ -195,27 +213,24 @@ class Archiver
   #       msg1
   #       msg2
   #   ...
-  def split_messages_into_month_dirs(hsh)
-    tmpdir = Pathname.new(Dir.mktmpdir("archive"))
-    at_exit{tmpdir.rmtree}
-
-    debug "Splitting into year-month directories"
+  # Already existing messages will not be copied again.
+  def split_messages_into_month_dirs(hsh, target)
+    debug "Splitting into year-month directories under #{target}"
+    target.mkpath unless target.directory?
 
     hsh.each_pair do |year, months|
-      year_dir = tmpdir + year.to_s
-      year_dir.mkdir
+      year_dir = target + year.to_s
+      year_dir.mkdir unless year_dir.directory?
 
       months.each do |month, messages|
         month_dir = year_dir + month.to_s
-        month_dir.mkdir
+        month_dir.mkdir unless month_dir.directory?
 
         messages.each do |msgpath|
-          FileUtils.cp(msgpath, month_dir)
+          FileUtils.cp(msgpath, month_dir) unless month_dir.join(msgpath.basename).file?
         end
       end
     end
-
-    tmpdir
   end
 
   # Run mhonarc over the +source+ directory and place the
