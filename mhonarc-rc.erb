@@ -149,6 +149,7 @@ html
 <html lang="en">
 <head>
  <title>$SUBJECTNA$</title>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
  <link rel="stylesheet" type="text/css" media="screen" href="<%= stylefile %>">
 </head>
 <body>
@@ -447,3 +448,8 @@ html
 <TopLinks>
 <div></div>
 </TopLinks>
+
+<!-- Convert everything to UTF-8 -->
+<TextEncode>
+utf-8; MHonArc::UTF8::to_utf8; MHonArc/UTF8.pm
+</TextEncode>
