@@ -23,6 +23,11 @@ require "pathname"
 require "erb"
 require "mail"
 
+begin
+  require "rb-inotify"
+rescue LoadError
+end
+
 # Archiver class. Point it to a target directory you want to place your web
 # archive under, add some MLs to process and start the process via #archive!.
 # You have some influence over the used (temporary) MHonArc RC file by specifying
@@ -83,6 +88,7 @@ class Archiver
     @mutex        = Mutex.new
     @rc_args      = MRC_DEFAULTS.merge(rc_args)
     @debug        = false
+    @inotify_thread = nil
   end
 
   # Enable/disable debugging output.
@@ -109,14 +115,52 @@ class Archiver
     self
   end
 
+  # The more elegant variant of #preprocess_mlmmj_mails. Instead of polling all
+  # mails and testing whether they are there, use inotify to have Linux notify
+  # us when a new file is added to the ML directory. For this method to work
+  # +rb-inotify+ must be available on your system (otherwise you get a
+  # NotImplementedError).
+  def watch_mlmmj_mails!
+    raise(NotImplementedError, "This is only possible with rb-inotify!") unless defined?(INotify)
+
+    @inotifier = INotify::Notifier.new
+
+    @mailinglists.each do |path|
+      archive_dir = path + ARCHIVE_DIR
+
+      @inotifier.watch(archive_dir.to_s, :create) do |event|
+        next unless File.file?(event.absolute_name)
+        next unless event.name =~ /^\d+$/
+
+        debug "Got a new mail: #{event.name}"
+        sleep 2 # Wait for the file to be fully written
+
+        @mutex.synchronize do
+          mail = Mail.read(event.absolute_name)
+          FileUtils.cp(event.absolute_name, @sorted_target + path.basename + mail.date.year.to_s + mail.date.month.to_s)
+        end
+      end
+    end
+
+    debug "Watching MLs via inotify."
+    @inotify_thread = Thread.new{@inotifier.run}
+  end
+
+  # Terminate the watching thread started by #watch_mlmmj_mails.
+  def stop_watching_mlmmj_mails!
+    @inotify_thread.terminate
+  end
+
   # Iterates over all mailinglists and copies new messages into
   # the intermediate month directory structure.
   def preprocess_mlmmj_mails!
     @sorted_target.mkpath unless @sorted_target.directory?
 
-    @mailinglists.each do |path|
-      hsh = collect_messages(path + ARCHIVE_DIR)
-      split_messages_into_month_dirs(hsh, @sorted_target + path.basename) # path.basename is the ML name
+    @mutex.synchronize do
+      @mailinglists.each do |path|
+        hsh = collect_messages(path + ARCHIVE_DIR)
+        split_messages_into_month_dirs(hsh, @sorted_target + path.basename) # path.basename is the ML name
+      end
     end
   end
 

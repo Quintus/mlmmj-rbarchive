@@ -53,7 +53,16 @@ they are already nicely sorted:
 a.preprocess_mlmmj_mails!
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Finally, start the conversion process:
+After having prepared all existing mail, you can now watch the ML’s
++archive+ directories for changes rather than running the
+Archiver#preprocess_mlmmj_mails! method periodically:
+
+~~~~~~~~~~~~~~~~~~~~~~~ ruby
+a.watch_mlmmj_mails!
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Note that the above only works if you have the `rb-inotify` gem
+installed. Finally, start the conversion process:
 
 ~~~~~~~~~~~~~~~~~~~~~~~ ruby
 a.archive!
