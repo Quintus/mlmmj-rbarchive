@@ -81,6 +81,8 @@ class Archiver
   #   Target for the "search" link.
   # [stylefile ("/archive.css")]
   #   CSS style file to reference from the outputted HTML pages.
+  # [mhonarc ("/usr/bin/mhonarc")]
+  #   Path to the +mhonarc+ executable to create the archive.
   def initialize(sorted_mail_target, target, rc_args = {})
     @sorted_target = Pathname.new(sorted_mail_target).expand_path
     @target_dir   = Pathname.new(target).expand_path
@@ -89,6 +91,7 @@ class Archiver
     @rc_args      = MRC_DEFAULTS.merge(rc_args)
     @debug        = false
     @inotify_thread = nil
+    @mhonarc      = rc_args[:mhonarc] || MHONARC
   end
 
   # Enable/disable debugging output.
@@ -312,7 +315,7 @@ class Archiver
     target = @target_dir + rel_target
     target.mkpath unless target.directory?
 
-    cmd = "#{MHONARC} -rcfile '#{rcpath}' -outdir '#{target}' -add '#{source}'"
+    cmd = "#{@mhonarc} -rcfile '#{rcpath}' -outdir '#{target}' -add '#{source}'"
     debug "Executing: #{cmd}"
     system(cmd)
   end
