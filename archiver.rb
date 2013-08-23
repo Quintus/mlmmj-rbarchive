@@ -315,9 +315,9 @@ class Archiver
     target = @target_dir + rel_target
     target.mkpath unless target.directory?
 
-    cmd = "#{@mhonarc} -rcfile '#{rcpath}' -outdir '#{target}' -add '#{source}'"
-    debug "Executing: #{cmd}"
-    system(cmd)
+    ary = [@mhonarc.to_s, "-rcfile", rcpath.to_s, "-outdir", target.to_s, "-add", source.to_s]
+    debug "Executing: #{ary.inspect}"
+    system(*ary)
   end
 
   # Prints +str+ onto stdout via #puts if #debug_mode?.
