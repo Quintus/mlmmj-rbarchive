@@ -12,6 +12,27 @@ Requirements
 * The `mail` gem
 * The `paint` gem
 
+Optionally, you can install the `rb-inotify` gem. This will make a
+special watching method available for you (see below).
+
+Installation
+------------
+
+mlmmj-rbarchive is available from RubyGems. Install it as usual:
+
+```
+$ gem install mlmmj-rbarchiver.gem
+```
+
+Alternatively, you can build the very latest code from Git:
+
+```
+$ git clone git://github.com/Quintus/mlmmj-rbarchive.git
+$ cd mlmmj-rbarchive
+$ rake gem
+$ gem install pkg/mlmmj-rbarchiver-*.gem
+```
+
 Usage
 -----
 
@@ -61,7 +82,7 @@ below a directory `output` below the current directory. To actually
 add an mlmmj ML do the following:
 
 ``` ruby
-a << "/var/spool/mlmmj/my-ml
+a << "/var/spool/mlmmj/my-ml"
 ```
 
 Note you don’t have to specify the "archive" directory below `my-ml`
@@ -78,24 +99,22 @@ they are already nicely sorted:
 a.preprocess_mlmmj_mails!
 ```
 
-After having prepared all existing mail, you can now watch the ML’s
-+archive+ directories for changes rather than running the
-Archiver#preprocess_mlmmj_mails! method periodically:
+You have to rerun this method each time you want to update the HTML
+mail archive. If you have the `rb-inotify` gem installed however, you
+can leverage Linux’ _inotify_ utility and watch the MLs’ directories for
+mails instead:
 
 ``` ruby
 a.watch_mlmmj_mails!
 ```
 
-Note that the above only works if you have the `rb-inotify` gem
-installed. Finally, start the conversion process:
+This will reprocess the mailinglist as new messages arrive.
+
+Finally, start the conversion process:
 
 ``` ruby
 a.archive!
 ```
-
-You can run this periodically if you want, already processed
-messages will not be processed again, only new messages are
-added to the web archive.
 
 #### I want more output! ####
 
