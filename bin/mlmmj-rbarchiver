@@ -48,6 +48,7 @@ Usage: mlmmj-rbarchiver [Options] -i MLDIR -o OUTDIR
   op.on("-m", "--mhonarc PATH", "Path to the mhonarc executable"){ |path| options[:mhonarc] = Pathname.new(path).expand_path }
   op.on("-o", "--outdir PATH", "Target directory for the output HTML files"){ |path| options[:outdir] = Pathname.new(path).expand_path }
   op.on("-s", "--style STRING", "Path to a CSS file referenced from the HTML.", "This is copied as-is!"){ |str| options[:stylefile] = str }
+  op.on("-S", "--search URL", "Search target location"){ |url| options[:searchtarget] = url }
   op.on("-v", "--version", "Print version number and exit"){ puts(MlmmjArchiver::VERSION); exit }
   op.on("-V", "--[no-]verbose", "Turn on verbose mode"){ |bool| options[:verbose] = bool }
   op.on("-x", "--[no-]checknoarchive", "Check the mails' X-No-Archive header"){ |bool| options[:checknoarchive] = bool }

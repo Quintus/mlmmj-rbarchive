@@ -167,8 +167,10 @@ html
   <div id="toplinks">
   $BUTTON(PREV)$ $BUTTON(NEXT)$ $BUTTON(TPREV)$ $BUTTON(TNEXT)$ [<a
   href="$IDXFNAME$#$MSGNUM$">Date Index</a>] [<a
-  href="$TIDXFNAME$#$MSGNUM$">Thread Index</a>] [<a
-  href="<%= searchtarget %>">Search</a>]
+  href="$TIDXFNAME$#$MSGNUM$">Thread Index</a>]
+<% if searchtarget %>
+  [<a href="<%= searchtarget %>">Search</a>]
+<% end %>
   </div>
  </div>
  <div id="mailinglists">
@@ -277,8 +279,10 @@ html
    <a href="$TIDXFNAME$">Thread Index</a>
    |
    <a href="$IDXFNAME$">Date Index</a>
+<% if searchtarget %>
    |
    <a href="<%= searchtarget %>">Search</a>
+<% end %>
   </div>
  </div>
  <div id="mailinglists">
@@ -328,8 +332,10 @@ html
    <a href="$TIDXFNAME$">Thread Index</a>
    |
    <a href="$IDXFNAME$">Date Index</a>
+<% if searchtarget %>
    |
    <a href="<%= searchtarget %>">Search</a>
+<% end %>
   </div>
  </div>
  <div id="mailinglists">

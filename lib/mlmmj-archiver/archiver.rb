@@ -43,7 +43,7 @@ class MlmmjArchiver::Archiver
     :tlevels => 8,
     :archiveadmin => "postmaster@example.org",
     :checknoarchive => true,
-    :searchtarget => "/search",
+    :searchtarget => nil,
     :stylefile => "/archive.css"
   }.freeze
   # Template for generating the temporary MHonArc RC file.
@@ -64,8 +64,9 @@ class MlmmjArchiver::Archiver
   # [checknoarchive (true)]
   #  If set, adds <CHECKNOARCHIVE> to the rc file. Otherwise
   #  adds <NOCHECKNOARCHIVE>.
-  # [searchtarget ("/search")]
-  #   Target for the "search" link.
+  # [searchtarget (nil)]
+  #   If this is set, displays a link called "search" next to
+  #   the index links that links to the location specified here.
   # [stylefile ("/archive.css")]
   #   CSS style file to reference from the outputted HTML pages.
   # [mhonarc ("/usr/bin/mhonarc")]
@@ -323,15 +324,4 @@ class MlmmjArchiver::Archiver
     puts str if debug_mode?
   end
 
-end
-
-if __FILE__ == $0
-  a = Archiver.new("output",
-                   header: "<p>My Test ML archives</p>",
-                   searchtarget: "../../search",
-                   stylefile: "../../../archive.css"
-                   )
-  a.debug_mode = true
-  a << "test-ml"
-  a.archive!
 end
