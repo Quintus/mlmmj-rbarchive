@@ -22,6 +22,7 @@ require "fileutils"
 require "pathname"
 require "erb"
 require "mail"
+require "paint"
 
 begin
   require "rb-inotify"

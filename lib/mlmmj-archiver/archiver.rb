@@ -47,12 +47,10 @@ class MlmmjArchiver::Archiver
     :stylefile => "/archive.css"
   }.freeze
   # Template for generating the temporary MHonArc RC file.
-  MRC_TEMPLATE = ERB.new(File.read(File.join(File.expand_path(File.dirname(__FILE__)), "..", "mhonarc-rc.erb")))
+  MRC_TEMPLATE = ERB.new(File.read(File.join(File.expand_path(File.dirname(__FILE__)), "..", "..", "mhonarc-rc.erb")))
 
   # Create a new Archiver that stores its HTML mails below
-  # the given +target+ directory. The mlmmj mail archive
-  # is split into a year-month directory structure previously
-  # inside +sorted_mail_target. +rc_args+ allows
+  # the given +target+ directory. +rc_args+ allows
   # the customization of the used MHonArc RC file.
   # It is a hash that takes the following arguments
   # (the values in parentheses denote the default values)
@@ -72,8 +70,11 @@ class MlmmjArchiver::Archiver
   #   CSS style file to reference from the outputted HTML pages.
   # [mhonarc ("/usr/bin/mhonarc")]
   #   Path to the +mhonarc+ executable to create the archive.
-  def initialize(sorted_mail_target, target, rc_args = {})
-    @sorted_target = Pathname.new(sorted_mail_target).expand_path
+  # [cachedir (nil)]
+  #  Path to a directory where the mails are stored sorted.
+  #  Setting this to a permanent storage will speed up the
+  #  archiving process on large MLs.
+  def initialize(target, rc_args = {})
     @target_dir   = Pathname.new(target).expand_path
     @mailinglists = []
     @mutex        = Mutex.new
@@ -81,6 +82,14 @@ class MlmmjArchiver::Archiver
     @debug        = false
     @inotify_thread = nil
     @mhonarc      = rc_args[:mhonarc] || MHONARC
+
+    if rc_args[:cachedir]
+      @sorted_target = Pathname.new(rc_args[:cachedir]).expand_path
+    else
+      @sorted_target = Pathname.new(Dir.mktmpdir)
+      at_exit{FileUtils.rm_rf(@sorted_target)}
+    end
+
   end
 
   # Enable/disable debugging output.
