@@ -9,7 +9,7 @@ GEMSPEC = Gem::Specification.new do |s|
 
   s.author = "Marvin Gülker"
   s.email = "quintus@quintilianus.eu"
-  s.homepage = "https://github.com/Quintus/mlmmj-rbarchiver"
+  s.homepage = "http://quintus.github.io/mlmmj-rbarchiver"
   s.license = "GPL"
   s.summary = "HTML archive generator for mlmmj mailinglists."
   s.description =<<-EOF
