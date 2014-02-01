@@ -38,13 +38,13 @@ Usage: mlmmj-rbarchiver [Options] -i MLDIR -o OUTDIR
   op.separator ""
   op.separator "Options:"
 
-  op.on("-a", "--admin EMAIL", "E-Mail address of the administrator"){ |addr| options[:adminemail] = addr }
+  op.on("-a", "--admin EMAIL", "E-Mail address of the administrator"){ |addr| options[:archiveadmin] = addr }
   op.on("-c", "--config-file FILE", "Read configuration from FILE"){ |path| options[:configfile] = Pathname.new(path).expand_path }
   op.on("-C", "--cachedir DIR", "Sorted cache directory"){ |path| options[:cachedir] = Pathname.new(path).expand_path }
   op.on("-h", "--help", "Print this help and exit."){ puts(op); exit }
   op.on("-H", "--header STRING", "HTML code shown above everyhing"){ |str| options[:header] = str }
   op.on("-i", "--indir PATH", "mlmmj mailinglist to archive"){ |path| options[:indir] = Pathname.new(path).expand_path }
-  op.on("-l", "--levels NUM", Integer, "Maxmimum message nest before flattening"){ |num| options[:level] = num }
+  op.on("-l", "--levels NUM", Integer, "Maxmimum message nest before flattening"){ |num| options[:tlevels] = num }
   op.on("-m", "--mhonarc PATH", "Path to the mhonarc executable"){ |path| options[:mhonarc] = Pathname.new(path).expand_path }
   op.on("-o", "--outdir PATH", "Target directory for the output HTML files"){ |path| options[:outdir] = Pathname.new(path).expand_path }
   op.on("-s", "--style STRING", "Path to a CSS file referenced from the HTML.", "This is copied as-is!"){ |str| options[:stylefile] = str }
