@@ -47,7 +47,7 @@ class MlmmjArchiver::Archiver
     :stylefile => "/archive.css"
   }.freeze
   # Template for generating the temporary MHonArc RC file.
-  MRC_TEMPLATE = ERB.new(File.read(File.join(File.expand_path(File.dirname(__FILE__)), "..", "..", "mhonarc-rc.erb")))
+  MRC_TEMPLATE = ERB.new(File.read(File.join(File.expand_path(File.dirname(__FILE__)), "..", "..", "data", "mhonarc-rc.erb")))
 
   # Create a new Archiver that stores its HTML mails below
   # the given +target+ directory. +rc_args+ allows
