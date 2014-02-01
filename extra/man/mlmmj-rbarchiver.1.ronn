@@ -1,0 +1,143 @@
+mlmmj-rbarchiver(1) -- Convert mlmmj MLs to an HTML archive
+===========================================================
+
+## SYNPOSIS
+
+`mlmmj-rbarchive -i INDIR -o OUTDIR` [OPTIONS]
+
+## DESCRIPTION
+
+`mlmmj-rbarchive` converts an mlmmj mailinglist into a browsable HTML
+archive. You can point your webserver to the resulting directory and
+thereby serve it as a (public) webarchive for the mailinglist.
+
+## USAGE
+
+The `-i` and `-o` options are required and the program will abort if
+any of them is missing. The former specifies the root directory of the
+mlmmj mailinglist you want to process, whereas the latter specifies
+the directory the HTML will be outputted to. To be exact, the program
+will take the `archive/` subdirectory of the input directory for
+processing and will output to a directory named after the processed ML
+below the output directory.
+
+## OPTIONS
+
+* `-a EMAIL`, `--admin EMAIL`:
+  Administrative Email contact.
+
+* `-c FILE`, `--config-file FILE`:
+  Configuration file to read options from. See below for
+  more information on this.
+
+* `-C DIR`, `--cachedir DIR`:
+  Cache directory for storing the sorted emails. Usually this
+  is set automatically to some temporary directory, but you
+  can set this to a permanent directory if you want. This will
+  cause the program to not regenerate the entire ML archive, but
+  instead use what can be found in that cache directory, resulting
+  in a faster processing, especially if the mailinglist in question
+  is large.
+
+* `-h`, `--help`:
+  Display a short option summary.
+
+* `-H HTML`, `--header HTML`:
+  A short HTML snippet placed at the top of each page.
+  Set this to something like `<p>My Mailinglist archive</p>`.
+
+* `-i DIR`, `--indir DIR`:
+  The mlmmj mailinglist to process. *Required*.
+
+* `-l`, `--levels NUM`:
+  Maximum indentation level before the threads are flattened.
+
+* `-m BINARY`, `--mhonarc BINARY`:
+  Path to the mhonarc(1) executable. Usually this is found out
+  automatically.
+
+* `-o DIR`, `--outdir DIR`:
+  The target directory for the HTML files. *Required*.
+
+* `-s`, `--style STRING`:
+  CSS link to include in each HTML files’ `<head>` section.
+  This is copied as-is, you have to provide the CSS file
+  yourself.
+
+* `-S`, `--search URL`:
+  Add a link called "search" to the navigation bar that links
+  to the URL specified here. Nothing more is done, you have to
+  implement the target yourself.
+
+* `-v`, `--version`:
+  Print the version number and exit.
+
+* `-V`, `--verbose`:
+  Give more information while processing.
+
+* `-x`, `--no-checknoarchive`:
+  Do *not* check the `X-NoArchive` email header that instructs
+  archiving software to ignore an email. Note that the default
+  behaviour is to honour that header.
+
+## CONFIGURATION FILE
+
+The `-c` option allows you to specify a configuration file so you
+don’t have to pass all the above commandline options again and
+again. Instead you can set them in the file and have the program read
+that file on startup. Most things specifyable via the commandline can
+be set in the config file too, so I encourage you to use such a file
+to keep your commands clean. The mapping of the configuration file
+directives to the above commandline options is as follows:
+
+    ┌────────────────┬────────┐
+    │ Directive      │ Option │
+    ├────────────────┼────────┤
+    │ archiveadmin   │ -a     │
+    │ cachedir       │ -c     │
+    │ checknoarchive │ -x     │
+    │ header         │ -H     │
+    │ indir          │ -i     │
+    │ mhonarc        │ -m     │
+    │ outdir         │ -o     │
+    │ tlevels        │ -l     │
+    │ searchtarget   │ -S     │
+    │ stylefile      │ -s     │
+    └────────────────┴────────┘
+
+See the example configuration file provided in the `extra/` directory
+in the source for concrete usage instructions.
+
+## EXAMPLE
+
+Suppose you want to process the mlmmj mailinglist at
+`/var/spool/mlmmj/mymailinglist` and output the HTML to the directory
+`/var/www/mailarchive/mymailinglist`. This can be achieved as follows:
+
+    $ mlmmj-rbarchive -i /var/spool/mlmmj/mymailinglist -o /var/www/mailarchive
+
+Note you don’t have to specify the ML subdirectory, this is created
+automatically for you.
+
+The resulting directory `/var/www/mailarchive/mymailinglist` will
+contain all messages sent to the ML converted to HTML. Note this does
+*not* create a toplevel `index.html` file for you, so you probably
+want to create one that contains information about how to
+subscribe/unsubscribe from the mailinglists archived at the
+website. That file will be left alone by `mlmmj-rbarchive`.
+
+An example cron(8) entry for periodically running that command could
+look like this:
+
+    0 2 * * * mlmmj-rbarchive -i /var/spool/mymailinglist -o /var/www/mailarchive
+
+That would run the shown command every day at 02:00 in the night.
+
+## AUTHOR
+
+Marvin Gülker `<quintus@quintilianus.eu>`
+
+## SEE ALSO
+
+mlmmj website ([http://www.mlmmj.org](http://www.mlmmj.org)), project page
+([https://github.com/Quintus/mlmmj-rbarchive](https://github.com/Quintus/mlmmj-rbarchive))
