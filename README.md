@@ -27,9 +27,9 @@ add any new messages delivered to your ML to the HTML archive.
 
 An example call may look like this:
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 $ mlmmj-rbarchiver -i /var/spool/mlmmj/mymailinglist -o /var/www/mlarchive
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 This will take all mails found in
 `/var/spool/mlmmj/mymailinglist/archive` and output them to
@@ -48,21 +48,21 @@ it could look like.
 
 To use it as a library, first create a new archiver:
 
-~~~~~~~~~~~~~~~~~~~~~~~ ruby
+``` ruby
 require "mlmmj-archiver"
 
 a = MlmmjArchiver::Archiver.new("output", # Target directory for all the messages
                                 header: "<p>My ML archive</p>", # HTML to display at the top
                                 stylefile: "/stylesheets/archive.css") # CSS stylesheet to reference from the HTML files
-~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 This will create an archiver that places the resulting HTML files
 below a directory `output` below the current directory. To actually
 add an mlmmj ML do the following:
 
-~~~~~~~~~~~~~~~~~~~~~~~ ruby
+``` ruby
 a << "/var/spool/mlmmj/my-ml
-~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 Note you don’t have to specify the "archive" directory below `my-ml`
 manually. Next, create an empty file `my-ml/control/webarchive`. This
@@ -74,24 +74,24 @@ You can now preprocess the mails into a hierarchical year-month
 directory structure so that before the messages get passed to MHonArc
 they are already nicely sorted:
 
-~~~~~~~~~~~~~~~~~~~~~~~ ruby
+``` ruby
 a.preprocess_mlmmj_mails!
-~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 After having prepared all existing mail, you can now watch the ML’s
 +archive+ directories for changes rather than running the
 Archiver#preprocess_mlmmj_mails! method periodically:
 
-~~~~~~~~~~~~~~~~~~~~~~~ ruby
+``` ruby
 a.watch_mlmmj_mails!
-~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 Note that the above only works if you have the `rb-inotify` gem
 installed. Finally, start the conversion process:
 
-~~~~~~~~~~~~~~~~~~~~~~~ ruby
+``` ruby
 a.archive!
-~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 You can run this periodically if you want, already processed
 messages will not be processed again, only new messages are
@@ -102,18 +102,18 @@ added to the web archive.
 Do this before you start adding mailinglists to the
 archiver:
 
-~~~~~~~~~~~~~~~~~~~~~~~ ruby
+``` ruby
 a.debug_mode = true
-~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 Docs?
 -----
 
 To get a more thorough documentation, run this:
 
-~~~~~~~~~~~~~~~~~~~~~~~
+```
 $ rdoc archiver.rb
-~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 You will then end up with some more detailed docs in a directory `doc`
 below the current working directory.
