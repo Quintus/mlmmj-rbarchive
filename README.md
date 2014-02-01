@@ -118,6 +118,13 @@ $ rdoc archiver.rb
 You will then end up with some more detailed docs in a directory `doc`
 below the current working directory.
 
+Links
+-----
+
+* [Online docs](http://quintus.github.io/mlmmj-rbarchiver)
+* [Repository](https://github.com/Quintus/mlmmj-rbarchiver)
+* [Issue tracker](https://github.com/Quintus/mlmmj-rbarchiver/issues)
+
 License
 -------
 
@@ -140,3 +147,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 The MHonArc template file is based on mlmmj-archiver by Andreas Schneider,
 which can be found here: http://git.cryptomilk.org/projects/mlmmj-webarchiver.git.
 It is GPL-copyrighted free software, hence this is also GPL’ed free software.
+
+You can contact me at quintus ät quintilianus döt eu.
