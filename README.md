@@ -9,23 +9,50 @@ Requirements
 
 * [Ruby](http://ruby-lang.org) 1.9.3+
 * [MHonArc](http://mhonarc.org)
+* The `mail` gem
+* The `paint` gem
 
 Usage
 -----
 
-This is currently just a library, so no fancy commandline options. You
-can incorporate it in your program and provide commandline options
-yourself if you want.
+You can choose between using mlmmj-rbarchive as a library or as a
+commandline program.
 
-Create a new archiver:
+### Commandline ###
+
+The `mlmmj-rbarchiver` program allows to process any given mlmmj ML
+directory directly into a browsable HTML mailinglist archive. It is
+intended to be run regularly from Cron so it is able to cumulatively
+add any new messages delivered to your ML to the HTML archive.
+
+An example call may look like this:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$ mlmmj-rbarchiver -i /var/spool/mlmmj/mymailinglist -o /var/www/mlarchive
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This will take all mails found in
+`/var/spool/mlmmj/mymailinglist/archive` and output them to
+`/var/www/mlarchive/mymailinglist` in a month-year-ordered
+format. Note you still have to provide a toplevel `index.html`
+yourself.
+
+The program features a good number of commandline options; run it with
+`-h` to get a summary. For styling you might especially be interested
+in the `-s` option. You might also use a configuration file with `-c`
+that allows you to specify some options once and for all; see the
+`rbarchiver.conf` file in the `extra/` directory for an example of how
+it could look like.
+
+### Library ###
+
+To use it as a library, first create a new archiver:
 
 ~~~~~~~~~~~~~~~~~~~~~~~ ruby
 require "mlmmj-archiver"
 
-a = MlmmjArchiver::Archiver.new("mailcache", # Cache directory for mails sorted by month for easier processing
-                                "output", # Target directory for all the messages
+a = MlmmjArchiver::Archiver.new("output", # Target directory for all the messages
                                 header: "<p>My ML archive</p>", # HTML to display at the top
-                                searchtarget: "/my-search", # Link target for the "search" link
                                 stylefile: "/stylesheets/archive.css") # CSS stylesheet to reference from the HTML files
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -70,8 +97,7 @@ You can run this periodically if you want, already processed
 messages will not be processed again, only new messages are
 added to the web archive.
 
-I want more output!
--------------------
+#### I want more output! ####
 
 Do this before you start adding mailinglists to the
 archiver:
@@ -96,7 +122,7 @@ License
 -------
 
 mlmmj-rbarchive makes a web archive from your mlmmj-archive.
-Copyright (C) 2013  Marvin Gülker
+Copyright (C) 2013-2014  Marvin Gülker
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
