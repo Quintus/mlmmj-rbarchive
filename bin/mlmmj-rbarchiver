@@ -1,0 +1,82 @@
+#!/usr/bin/env ruby
+
+require "optparse"
+require_relative "../lib/mlmmj-archiver"
+
+########################################
+# Helpers
+
+def info(str)
+  puts(str)
+end
+
+def warn(str)
+  puts Paint[str, :yellow]
+end
+
+def error(str)
+  puts Paint[str, :red]
+end
+
+def error!(exception)
+  error(exception.to_s)
+  raise(exception)
+end
+
+########################################
+# Argument parsing
+
+options = {}
+
+OptionParser.new do |op|
+  op.banner =<<-EOF
+This program archives mlmmj mailinglists into HTML archives.
+
+Usage: mlmmj-rbarchiver [Options] -i MLDIR -o OUTDIR
+  EOF
+
+  op.separator ""
+  op.separator "Options:"
+
+  op.on("-a", "--admin EMAIL", "E-Mail address of the administrator"){ |addr| options[:adminemail] = addr }
+  op.on("-c", "--config-file FILE", "Read configuration from FILE"){ |path| options[:configfile] = Pathname.new(path).expand_path }
+  op.on("-C", "--cachedir DIR", "Sorted cache directory"){ |path| options[:cachedir] = Pathname.new(path).expand_path }
+  op.on("-h", "--help", "Print this help and exit."){ puts(op); exit }
+  op.on("-H", "--header STRING", "HTML code shown above everyhing"){ |str| options[:header] = str }
+  op.on("-i", "--indir PATH", "mlmmj mailinglist to archive"){ |path| options[:indir] = Pathname.new(path).expand_path }
+  op.on("-l", "--levels NUM", Integer, "Maxmimum message nest before flattening"){ |num| options[:level] = num }
+  op.on("-m", "--mhonarc PATH", "Path to the mhonarc executable"){ |path| options[:mhonarc] = Pathname.new(path).expand_path }
+  op.on("-o", "--outdir PATH", "Target directory for the output HTML files"){ |path| options[:outdir] = Pathname.new(path).expand_path }
+  op.on("-s", "--style STRING", "Path to a CSS file referenced from the HTML.", "This is copied as-is!"){ |str| options[:stylefile] = str }
+  op.on("-v", "--version", "Print version number and exit"){ puts(MlmmjArchiver::VERSION); exit }
+  op.on("-V", "--[no-]verbose", "Turn on verbose mode"){ |bool| options[:verbose] = bool }
+  op.on("-x", "--[no-]checknoarchive", "Check the mails' X-No-Archive header"){ |bool| options[:checknoarchive] = bool }
+end.parse!(ARGV)
+
+########################################
+# Configfile
+
+if options[:configfile]
+  confighash = Hash[YAML.load_file(options[:configfile].to_s).map{|k, v| [k.to_sym, v]}]
+  options.update(confighash){|k, v1, v2| v1}
+end
+
+########################################
+# Checking
+
+error!("Required option -i missing") unless options[:indir]
+error!("Required option -o missing") unless options[:outdir]
+
+if options[:verbose]
+  puts "Specified options:"
+  options.each{|k, v| puts("#{k}: #{v}")}
+end
+
+########################################
+# Start of program
+
+archiver = MlmmjArchiver::Archiver.new(options.delete(:outdir), options)
+archiver.debug_mode = true if options[:verbose]
+archiver << options.delete(:indir)
+archiver.preprocess_mlmmj_mails!
+archiver.archive!
