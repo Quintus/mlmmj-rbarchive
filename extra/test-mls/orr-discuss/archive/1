@@ -1,0 +1,46 @@
+Delivered-To: orr-discuss@lists.openrubyrmk.org
+Received: from localhost.localdomain (x2f3c155.dyn.telefonica.de [2.243.193.85])
+	by mail.pegasus-alpha.eu (Postfix) with ESMTPSA id E81582BE12BC
+	for <orr-discuss@lists.openrubyrmk.org>; Fri, 17 May 2013 14:47:48 +0200 (CEST)
+Date: Fri, 19 Apr 2013 14:47:43 +0200
+From: Quintus <quintus@quintilianus.eu>
+To: orr-discuss@lists.openrubyrmk.org
+Subject: Test
+Message-ID: <20130517144743.36226631@quintilianus.eu>
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.17; x86_64-unknown-linux-gnu)
+Mime-Version: 1.0
+Content-Type: multipart/signed; micalg=PGP-SHA1;
+ boundary="Sig_/8KeuCEgA/hAnETWk4Zl81yu"; protocol="application/pgp-signature"
+
+--Sig_/8KeuCEgA/hAnETWk4Zl81yu
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Test
+
+--=20
+Blog: http://pegasus-alpha.eu/blog
+
+ASCII-Ribbon-Kampagne        ()   | ASCII Ribbon Campaign        ()
+- Stoppt HTML-E-Mail         /\   | - Against HTML E-Mail        /\
+- Stoppt propriet=C3=A4re Anh=C3=A4nge      | - Against proprietary attachm=
+ents
+www.asciiribbon.org/index-de.html | www.asciiribbon.org
+
+--Sig_/8KeuCEgA/hAnETWk4Zl81yu
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Disposition: attachment; filename=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iQEcBAEBAgAGBQJRlibyAAoJELh1XLHFkqhaDiEH/2C4bpZoCXVRjsrVYtd7d/0c
+P++/n76bGUfYaKQ8pzFAF0m9u/ff98RrIXT+c3sywpnihcRoUqQohNU3f8rzQ1BV
+SRI5bG3nQ2baX4T3rE49GMcotd7fIBep/pWx5Psg8oWOq6BkCnLlhUbDdIBmaTn0
+KN7G+BQnoZVahsMUftTAyKBQWuY8yUT/LtbenNrBT7IID9ips5XUz9G77GCzguv/
+d0mSalxlc40Hp4iEfoEX2s1688BhPD7aG8Qs1oElNjzHWNEQatsv7HI1erOt4WMc
+kCeqY8fBGmnd1QrciTrkOcs3Bsf219H+Q5IQj+XLli9sEzcSpHI8L3azCSoMB1g=
+=Uue5
+-----END PGP SIGNATURE-----
+
+--Sig_/8KeuCEgA/hAnETWk4Zl81yu--

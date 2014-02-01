@@ -1,0 +1,70 @@
+Delivered-To: orr-discuss@lists.openrubyrmk.org
+Received: from localhost.localdomain (ip-109-84-0-30.web.vodafone.de [109.84.0.30])
+	by mail.pegasus-alpha.eu (Postfix) with ESMTPSA id 190A92BE12BF
+	for <orr-discuss@lists.openrubyrmk.org>; Sat, 18 May 2013 13:26:44 +0200 (CEST)
+Date: Sat, 18 May 2013 13:26:30 +0200
+From: Quintus <quintus@quintilianus.eu>
+To: orr-discuss@lists.openrubyrmk.org
+Subject: Re: [orr-discuss] Domain-Anmeldung und Mailinglisten
+Message-ID: <20130518132630.43eafec5@quintilianus.eu>
+In-Reply-To: <35ac2urj57orr6pmoyromupi.1368873747719@email.android.com>
+References: <35ac2urj57orr6pmoyromupi.1368873747719@email.android.com>
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.17; x86_64-unknown-linux-gnu)
+Reply-To: orr-discuss@lists.openrubyrmk.org
+List-Id: orr-discuss.lists.openrubyrmk.org
+List-Post: <mailto:orr-discuss@lists.openrubyrmk.org>
+List-Owner: <mailto:orr-discuss+owner@lists.openrubyrmk.org>
+List-Help: <mailto:orr-discuss+help@lists.openrubyrmk.org>
+List-Unsubscribe: <mailto:orr-discuss+unsubscribe@lists.openrubyrmk.org>
+Mime-Version: 1.0
+Content-Type: multipart/signed; micalg=PGP-SHA1;
+ boundary="Sig_/80Prnu1zVCr9hWtH4XfNtGY"; protocol="application/pgp-signature"
+
+--Sig_/80Prnu1zVCr9hWtH4XfNtGY
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+Am Sat, 18 May 2013 12:42:27 +0200
+schrieb Holger Arndt <masamunes_son@web.de>:
+
+> Mahlzeit Quintus,
+>=20
+> Eine Mailingliste finde ich eine gute Idee. Ich w=FCrde aber gern mit
+> einer anderen Mailadresse dabei sein. Sobald die Familie wieder weg
+> ist schau ich mal wie ich das umstellen kann. Ansonsten
+> kjarrigan.lies@googlemail.com
+
+Einfach mit der einen Adresse abmelden und mit der neuen anmelden. Das
+Verfahren ist hier beschrieben:
+
+https://devel.pegasus-alpha.eu/projects/openrubyrmk/wiki/Mailing_Lists
+
+> Bis sp=E4ter
+
+Vale.
+
+--=20
+Blog: http://pegasus-alpha.eu/blog
+
+ASCII-Ribbon-Kampagne        ()   | ASCII Ribbon Campaign        ()
+- Stoppt HTML-E-Mail         /\   | - Against HTML E-Mail        /\
+- Stoppt propriet=E4re Anh=E4nge      | - Against proprietary attachments
+www.asciiribbon.org/index-de.html | www.asciiribbon.org
+
+--Sig_/80Prnu1zVCr9hWtH4XfNtGY
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Disposition: attachment; filename=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iQEcBAEBAgAGBQJRl2VqAAoJELh1XLHFkqhao4IH/R41Yvji2/MwSZpL4R7afW0x
+WApk/vOz4HkGHU4YixHF/M/41qouFC9wrUaE53NivOurs2yXuwkFCEzPv5Ayq4Wz
+zkPi1OVyq9G0ww7wzSfnlH8xmdoPTqDYLpi7tPTU+RgJVi8ogQZcoILdiz4h0zdA
+taONqqhBKlFE8kPYqbn2fEOOAni8u13MDw6W8JX0wJjm15CcjKVfoZ4nC9hmnmAJ
+D7ljRmbzXWAuJOZd2wV61awI2w7OdNk3hAh8UM4iEY+fKp/t6hJRccyChl9r6yjU
+O8c0IxFkpvMs7/XEuaKBnOOUFWQ0Byb6HBsmp6DnA1dAjg8GlNrIqU+PxIoNR8o=
+=vorc
+-----END PGP SIGNATURE-----
+
+--Sig_/80Prnu1zVCr9hWtH4XfNtGY--

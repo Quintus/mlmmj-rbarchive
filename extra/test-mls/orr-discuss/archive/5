@@ -1,0 +1,70 @@
+Delivered-To: orr-discuss@lists.openrubyrmk.org
+Received: from localhost.localdomain (ip-109-84-0-30.web.vodafone.de [109.84.0.30])
+	by mail.pegasus-alpha.eu (Postfix) with ESMTPSA id 5BBB72BE2110
+	for <orr-discuss@lists.openrubyrmk.org>; Sat, 18 May 2013 12:23:22 +0200 (CEST)
+Date: Sat, 18 May 2013 12:23:10 +0200
+From: Marvin =?ISO-8859-1?B?R/xsa2Vy?= <m-guelker@quintilianus.eu>
+To: orr-discuss@lists.openrubyrmk.org
+Subject: [orr-discuss] Domain-Anmeldung und Mailinglisten
+Message-ID: <20130518122310.09f27cd5@quintilianus.eu>
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.17; x86_64-unknown-linux-gnu)
+Reply-To: orr-discuss@lists.openrubyrmk.org
+List-Id: orr-discuss.lists.openrubyrmk.org
+List-Post: <mailto:orr-discuss@lists.openrubyrmk.org>
+List-Owner: <mailto:orr-discuss+owner@lists.openrubyrmk.org>
+List-Help: <mailto:orr-discuss+help@lists.openrubyrmk.org>
+List-Unsubscribe: <mailto:orr-discuss+unsubscribe@lists.openrubyrmk.org>
+Mime-Version: 1.0
+Content-Type: multipart/signed; micalg=PGP-SHA1;
+ boundary="Sig_/TEDNfSImMjquP6qBZoRbUrd"; protocol="application/pgp-signature"
+
+--Sig_/TEDNfSImMjquP6qBZoRbUrd
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+Hallo Leute,
+
+wie ihr den vorangegangenen E-Mails entnehmen k=F6nnt, habe ich die
+Domain openrubyrmk.org angemeldet. Es gibt allerdings noch keine
+Website, die man abrufen k=F6nnte ;-).
+
+Dar=FCber hinaus habe ich die Gelegenheit genutzt, eine Mailingliste f=FCr
+Forumsfaule einzurichten. Ich habe euch einfach mal alle
+zwangseingeschrieben, da ich dachte, dass das neben dem Forum eine gute
+M=F6glichkeit der Kommunikation ist. Ein Mailinglisten-Archiv gibt es
+noch nicht, wird aber schnell folgen (dazu schreibe ich sp=E4ter eine
+weitere E-Mail).
+
+Die Adresse der Mailingliste ist orr-discuss@lists.openrubyrmk.org.
+Genauere Informationen zur ML und der verwendeten Software gibt es in
+unserem Wiki:
+https://devel.pegasus-alpha.eu/projects/openrubyrmk/wiki/Mailing_Lists
+
+Valete,
+Quintus
+
+--=20
+Blog: http://pegasus-alpha.eu/blog
+
+ASCII-Ribbon-Kampagne        ()   | ASCII Ribbon Campaign        ()
+- Stoppt HTML-E-Mail         /\   | - Against HTML E-Mail        /\
+- Stoppt propriet=E4re Anh=E4nge      | - Against proprietary attachments
+www.asciiribbon.org/index-de.html | www.asciiribbon.org
+
+--Sig_/TEDNfSImMjquP6qBZoRbUrd
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Disposition: attachment; filename=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iQEcBAEBAgAGBQJRl1aSAAoJELh1XLHFkqhai4MH/3blbw7fsFuJHdmbkqAFYDEj
+Y4Si7uP9lLQho9S1xfxfrUCuMSVCAlD+GD67Hrs7Tv4Yu1H/K7gSXT1g3x2/tjbl
+nyT2PEz1xk7ROwhmDvSKWWB5x97TjvHtb9DDRrNPOjTT3oN9rtKGjP5us8R/yDPH
+3p6841t4GAFfSQjg0QjLpfZYoTLC25eP7sYezWma3vI4IjBbTzD9lAhUkvFlMAgb
+YKsiAf2qn+MxYzSxDfC734c24eh41gL/TO7lUqnP0kMikzKMVkUli07msPC3laYq
+sqffkDwAabj8ul4fITHy1ntAI5ybY4Z/qgyWsrT1z08toZUXskOSaVHoPAWz7AU=
+=yASi
+-----END PGP SIGNATURE-----
+
+--Sig_/TEDNfSImMjquP6qBZoRbUrd--
