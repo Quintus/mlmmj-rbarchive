@@ -20,15 +20,13 @@ yourself if you want.
 Create a new archiver:
 
 ~~~~~~~~~~~~~~~~~~~~~~~ ruby
-require "archiver"
-# or
-require_relative "./archiver"
+require "mlmmj-archiver"
 
-a = Archiver.new("mailcache", # Cache directory for mails sorted by month for easier processing
-                 "output", # Target directory for all the messages
-                 header: "<p>My ML archive</p>", # HTML to display at the top
-                 searchtarget: "/my-search", # Link target for the "search" link
-                 stylefile: "/stylesheets/archive.css") # CSS stylesheet to reference from the HTML files
+a = MlmmjArchiver::Archiver.new("mailcache", # Cache directory for mails sorted by month for easier processing
+                                "output", # Target directory for all the messages
+                                header: "<p>My ML archive</p>", # HTML to display at the top
+                                searchtarget: "/my-search", # Link target for the "search" link
+                                stylefile: "/stylesheets/archive.css") # CSS stylesheet to reference from the HTML files
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 This will create an archiver that places the resulting HTML files

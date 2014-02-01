@@ -17,17 +17,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-require "tempfile"
-require "fileutils"
-require "pathname"
-require "erb"
-require "mail"
-
-begin
-  require "rb-inotify"
-rescue LoadError
-end
-
 # Archiver class. Point it to a target directory you want to place your web
 # archive under, add some MLs to process and start the process via #archive!.
 # You have some influence over the used (temporary) MHonArc RC file by specifying
@@ -39,7 +28,7 @@ end
 # because this allows for an easier overview of the web archive. In the second
 # step, all these month directories are passed into +mhonarc+, which converts
 # them to HTML and stores them in the final directory.
-class Archiver
+class MlmmjArchiver::Archiver
 
   # Path relative to ML root containing the mails
   ARCHIVE_DIR  = "archive"
@@ -58,7 +47,7 @@ class Archiver
     :stylefile => "/archive.css"
   }.freeze
   # Template for generating the temporary MHonArc RC file.
-  MRC_TEMPLATE = ERB.new(File.read(File.join(File.expand_path(File.dirname(__FILE__)), "mhonarc-rc.erb")))
+  MRC_TEMPLATE = ERB.new(File.read(File.join(File.expand_path(File.dirname(__FILE__)), "..", "mhonarc-rc.erb")))
 
   # Create a new Archiver that stores its HTML mails below
   # the given +target+ directory. The mlmmj mail archive
