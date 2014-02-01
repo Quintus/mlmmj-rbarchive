@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body>
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./COPYING.html">COPYING</a>
+  
+    <li class="file"><a href="./README_md.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./MlmmjArchiver.html">MlmmjArchiver</a>
+  
+    <li><a href="./MlmmjArchiver/Archiver.html">MlmmjArchiver::Archiver</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation" class="description">
+
+<h1 id="label-mlmmj-rbarchive">mlmmj-rbarchive<span><a href="#label-mlmmj-rbarchive">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
+
+<p>Small Ruby program for properly archiving a mlmmj-managed
+mailinglist.</p>
+
+<h2 id="label-Requirements">Requirements<span><a href="#label-Requirements">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<ul><li>
+<p><a href="http://ruby-lang.org">Ruby</a> 1.9.3+</p>
+</li><li>
+<p><a href="http://mhonarc.org">MHonArc</a></p>
+</li><li>
+<p>The <code>mail</code> gem</p>
+</li><li>
+<p>The <code>paint</code> gem</p>
+</li></ul>
+
+<h2 id="label-Usage">Usage<span><a href="#label-Usage">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<p>You can choose between using mlmmj-rbarchive as a library or as
+a
+commandline program.</p>
+
+<h3 id="label-Commandline">Commandline<span><a href="#label-Commandline">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>The <code>mlmmj-rbarchiver</code> program allows to process any given mlmmj
+ML
+directory directly into a browsable HTML mailinglist archive. It
+is
+intended to be run regularly from Cron so it is able to cumulatively
+add
+any new messages delivered to your ML to the HTML archive.</p>
+
+<p>An example call may look like this:</p>
+
+<pre>$ mlmmj-rbarchiver -i /var/spool/mlmmj/mymailinglist -o /var/www/mlarchive</pre>
+
+<p>This will take all mails found
+in
+<code>/var/spool/mlmmj/mymailinglist/archive</code> and output them
+to
+<code>/var/www/mlarchive/mymailinglist</code> in a
+month-year-ordered
+format. Note you still have to provide a toplevel
+<code>index.html</code>
+yourself.</p>
+
+<p>The program features a good number of commandline options; run it
+with
+<code>-h</code> to get a summary. For styling you might especially be
+interested
+in the <code>-s</code> option. You might also use a
+configuration file with <code>-c</code>
+that allows you to specify some
+options once and for all; see the
+<code>rbarchiver.conf</code> file in the
+<code>extra/</code> directory for an example of how
+it could look like.</p>
+
+<h3 id="label-Library">Library<span><a href="#label-Library">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>To use it as a library, first create a new archiver:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;mlmmj-archiver&quot;</span>
+
+<span class="ruby-identifier">a</span> = <span class="ruby-constant">MlmmjArchiver</span><span class="ruby-operator">::</span><span class="ruby-constant">Archiver</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;output&quot;</span>, <span class="ruby-comment"># Target directory for all the messages</span>
+                                <span class="ruby-identifier">header</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;&lt;p&gt;My ML archive&lt;/p&gt;&quot;</span>, <span class="ruby-comment"># HTML to display at the top</span>
+                                <span class="ruby-identifier">stylefile</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;/stylesheets/archive.css&quot;</span>) <span class="ruby-comment"># CSS stylesheet to reference from the HTML files</span>
+</pre>
+
+<p>This will create an archiver that places the resulting HTML files
+below a
+directory <code>output</code> below the current directory. To actually
+add
+an mlmmj ML do the following:</p>
+
+<pre class="ruby"><span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;/var/spool/mlmmj/my-ml
+</span></pre>
+
+<p>Note you don’t have to specify the “archive” directory below
+<code>my-ml</code>
+manually. Next, create an empty file
+<code>my-ml/control/webarchive</code>. This
+signals mlmmj-rbarchive that
+you really want this ML to be processed;
+without this file, the directory
+is skipped even though you have added
+it to the archiver.</p>
+
+<p>You can now preprocess the mails into a hierarchical year-month
+directory
+structure so that before the messages get passed to MHonArc
+they are
+already nicely sorted:</p>
+
+<pre class="ruby"><span class="ruby-identifier">a</span>.<span class="ruby-identifier">preprocess_mlmmj_mails!</span>
+</pre>
+
+<p>After having prepared all existing mail, you can now watch the
+ML’s
+<code>archive</code> directories for changes rather than running
+the
+Archiver#preprocess_mlmmj_mails! method periodically:</p>
+
+<pre class="ruby"><span class="ruby-identifier">a</span>.<span class="ruby-identifier">watch_mlmmj_mails!</span>
+</pre>
+
+<p>Note that the above only works if you have the <code>rb-inotify</code>
+gem
+installed. Finally, start the conversion process:</p>
+
+<pre class="ruby"><span class="ruby-identifier">a</span>.<span class="ruby-identifier">archive!</span>
+</pre>
+
+<p>You can run this periodically if you want, already processed
+messages will
+not be processed again, only new messages are
+added to the web archive.</p>
+
+<h4 id="label-I+want+more+output%21">I want more output!<span><a href="#label-I+want+more+output%21">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>Do this before you start adding mailinglists to the
+archiver:</p>
+
+<pre class="ruby"><span class="ruby-identifier">a</span>.<span class="ruby-identifier">debug_mode</span> = <span class="ruby-keyword">true</span>
+</pre>
+
+<h2 id="label-Docs%3F">Docs?<span><a href="#label-Docs%3F">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<p>To get a more thorough documentation, run this:</p>
+
+<pre>$ rdoc archiver.rb</pre>
+
+<p>You will then end up with some more detailed docs in a directory
+<code>doc</code>
+below the current working directory.</p>
+
+<h2 id="label-License">License<span><a href="#label-License">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<p>mlmmj-rbarchive makes a web archive from your mlmmj-archive.
+Copyright (C)
+2013-2014 Marvin Gülker</p>
+
+<p>This program is free software: you can redistribute it and/or modify
+it
+under the terms of the GNU General Public License as published by
+the Free
+Software Foundation, either version 3 of the License, or
+(at your option)
+any later version.</p>
+
+<p>This program is distributed in the hope that it will be useful,
+but WITHOUT
+ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for
+more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along
+with this program. If not, see <a
+href="http://www.gnu.org/licenses">www.gnu.org/licenses</a>/.</p>
+
+<p>The MHonArc template file is based on mlmmj-archiver by Andreas
+Schneider,
+which can be found here: <a
+href="http://git.cryptomilk.org/projects/mlmmj-webarchiver.git">git.cryptomilk.org/projects/mlmmj-webarchiver.git</a>.
+It
+is GPL-copyrighted free software, hence this is also GPL’ed free software.</p>
+</div>
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.0.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class MlmmjArchiver::Archiver - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/mlmmj-archiver/archiver.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-3C-3C">#&lt;&lt;</a>
+    
+    <li ><a href="#method-i-add_ml">#add_ml</a>
+    
+    <li ><a href="#method-i-archive-21">#archive!</a>
+    
+    <li ><a href="#method-i-debug_mode-3D">#debug_mode=</a>
+    
+    <li ><a href="#method-i-debug_mode-3F">#debug_mode?</a>
+    
+    <li ><a href="#method-i-preprocess_mlmmj_mails-21">#preprocess_mlmmj_mails!</a>
+    
+    <li ><a href="#method-i-search">#search</a>
+    
+    <li ><a href="#method-i-stop_watching_mlmmj_mails-21">#stop_watching_mlmmj_mails!</a>
+    
+    <li ><a href="#method-i-watch_mlmmj_mails-21">#watch_mlmmj_mails!</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../COPYING.html">COPYING</a>
+  
+    <li class="file"><a href="../README_md.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../MlmmjArchiver.html">MlmmjArchiver</a>
+  
+    <li><a href="../MlmmjArchiver/Archiver.html">MlmmjArchiver::Archiver</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class MlmmjArchiver::Archiver</h1>
+
+  <div id="description" class="description">
+    
+<p><a href="Archiver.html">Archiver</a> class. Point it to a target directory
+you want to place your web archive under, add some MLs to process and start
+the process via <a href="Archiver.html#method-i-archive-21">archive!</a>.
+You have some influence over the used (temporary) MHonArc RC file by
+specifying some arguments to <a
+href="Archiver.html#method-c-new">::new</a>.</p>
+
+<p>Note that archiving for the web is a two-step process. First the mails in
+mlmmj’s <code>archive</code> folder need to be split up in a directory
+structure that allows processesing them month-by-month instead of
+processing them all at once, because this allows for an easier overview of
+the web archive. In the second step, all these month directories are passed
+into <code>mhonarc</code>, which converts them to HTML and stores them in
+the final directory.</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <!-- Constants -->
+    <section id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt id="ARCHIVE_DIR">ARCHIVE_DIR
+        
+        <dd class="description"><p>Path relative to ML root containing the mails</p>
+        
+      
+        <dt id="CONTROL_FILE">CONTROL_FILE
+        
+        <dd class="description"><p>Path relative to ML root containing the file that requests the web
+archiving.</p>
+        
+      
+        <dt id="MHONARC">MHONARC
+        
+        <dd class="description"><p>Path to the <code>mhonarc</code> executable.</p>
+        
+      
+        <dt id="MRC_DEFAULTS">MRC_DEFAULTS
+        
+        <dd class="description"><p>Default values for the MHonArc RC file.</p>
+        
+      
+        <dt id="MRC_TEMPLATE">MRC_TEMPLATE
+        
+        <dd class="description"><p>Template for generating the temporary MHonArc RC file.</p>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(target, rc_args = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Create a new <a href="Archiver.html">Archiver</a> that stores its HTML
+mails below the given <code>target</code> directory. <code>rc_args</code>
+allows the customization of the used MHonArc RC file. It is a hash that
+takes the following arguments (the values in parentheses denote the default
+values)</p>
+<dl class="rdoc-list label-list"><dt>header (“&lt;p&gt;ML archive&lt;/p&gt;”)
+<dd>
+<p>HTML header to prepend to every page. $IDXTITLE$ is replaced by the title
+of the respective index.</p>
+</dd><dt>tlevels (8)
+<dd>
+<p>Number of levels to nest threads before flattening.</p>
+</dd><dt>archiveadmin (postmaster@example.org)
+<dd>
+<p>E-Mail address of the archive administrator.</p>
+</dd><dt>checknoarchive (true)
+<dd>
+<p>If set, adds &lt;CHECKNOARCHIVE&gt; to the rc file. Otherwise adds
+&lt;NOCHECKNOARCHIVE&gt;.</p>
+</dd><dt>searchtarget (nil)
+<dd>
+<p>If this is set, displays a link called “search” next to the index links
+that links to the location specified here.</p>
+</dd><dt>stylefile (“/archive.css”)
+<dd>
+<p>CSS style file to reference from the outputted HTML pages.</p>
+</dd><dt>mhonarc (“/usr/bin/mhonarc”)
+<dd>
+<p>Path to the <code>mhonarc</code> executable to create the archive.</p>
+</dd><dt>cachedir (nil)
+<dd>
+<p>Path to a directory where the mails are stored sorted. Setting this to a
+permanent storage will speed up the archiving process on large MLs.</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/mlmmj-archiver/archiver.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">target</span>, <span class="ruby-identifier">rc_args</span> = {})
+  <span class="ruby-ivar">@target_dir</span>   = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">target</span>).<span class="ruby-identifier">expand_path</span>
+  <span class="ruby-ivar">@mailinglists</span> = []
+  <span class="ruby-ivar">@mutex</span>        = <span class="ruby-constant">Mutex</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@rc_args</span>      = <span class="ruby-constant">MRC_DEFAULTS</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">rc_args</span>)
+  <span class="ruby-ivar">@debug</span>        = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@inotify_thread</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@mhonarc</span>      = <span class="ruby-identifier">rc_args</span>[<span class="ruby-value">:mhonarc</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">MHONARC</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">rc_args</span>[<span class="ruby-value">:cachedir</span>]
+    <span class="ruby-ivar">@sorted_target</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">rc_args</span>[<span class="ruby-value">:cachedir</span>]).<span class="ruby-identifier">expand_path</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@sorted_target</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Dir</span>.<span class="ruby-identifier">mktmpdir</span>)
+    <span class="ruby-identifier">at_exit</span>{<span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">rm_rf</span>(<span class="ruby-ivar">@sorted_target</span>)}
+  <span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-3C-3C" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">&lt;&lt;</span><span
+            class="method-args">(path)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Like <a href="Archiver.html#method-i-add_ml">add_ml</a>, but returns
+<code>self</code> for method chaining.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="3C-3C-source">
+            <pre><span class="ruby-comment"># File lib/mlmmj-archiver/archiver.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">&lt;&lt;</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-identifier">add_ml</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- 3C-3C-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- 3C-3C-method -->
+
+    
+      <div id="method-i-add_ml" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_ml</span><span
+            class="method-args">(path)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Add a mlmmj ML directory to process.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="add_ml-source">
+            <pre><span class="ruby-comment"># File lib/mlmmj-archiver/archiver.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_ml</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-identifier">dir</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>).<span class="ruby-identifier">expand_path</span>
+  <span class="ruby-identifier">debug</span>(<span class="ruby-node">&quot;Adding ML directory: #{dir}&quot;</span>)
+
+  <span class="ruby-ivar">@mailinglists</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">dir</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- add_ml-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- add_ml-method -->
+
+    
+      <div id="method-i-archive-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">archive!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Process all the mails in all the directories.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="archive-21-source">
+            <pre><span class="ruby-comment"># File lib/mlmmj-archiver/archiver.rb, line 169</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">archive!</span>
+  <span class="ruby-ivar">@mutex</span>.<span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">rcpath</span> = <span class="ruby-identifier">generate_rcfile</span>
+
+    <span class="ruby-ivar">@mailinglists</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">control_file</span> = <span class="ruby-identifier">path</span> <span class="ruby-operator">+</span> <span class="ruby-constant">CONTROL_FILE</span>
+      <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">control_file</span>.<span class="ruby-identifier">file?</span>
+
+      <span class="ruby-identifier">process_ml</span>(<span class="ruby-ivar">@sorted_target</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">basename</span>, <span class="ruby-ivar">@target_dir</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">basename</span>, <span class="ruby-identifier">rcpath</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- archive-21-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- archive-21-method -->
+
+    
+      <div id="method-i-debug_mode-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">debug_mode=</span><span
+            class="method-args">(val)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Enable/disable debugging output.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="debug_mode-3D-source">
+            <pre><span class="ruby-comment"># File lib/mlmmj-archiver/archiver.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">debug_mode=</span>(<span class="ruby-identifier">val</span>)
+  <span class="ruby-ivar">@debug</span> = <span class="ruby-identifier">val</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- debug_mode-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- debug_mode-3D-method -->
+
+    
+      <div id="method-i-debug_mode-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">debug_mode?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>True if debugging output is enabled, see <a
+href="Archiver.html#method-i-debug_mode-3D">debug_mode=</a>.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="debug_mode-3F-source">
+            <pre><span class="ruby-comment"># File lib/mlmmj-archiver/archiver.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">debug_mode?</span>
+  <span class="ruby-ivar">@debug</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- debug_mode-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- debug_mode-3F-method -->
+
+    
+      <div id="method-i-preprocess_mlmmj_mails-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">preprocess_mlmmj_mails!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Iterates over all mailinglists and copies new messages into the
+intermediate month directory structure.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="preprocess_mlmmj_mails-21-source">
+            <pre><span class="ruby-comment"># File lib/mlmmj-archiver/archiver.rb, line 157</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">preprocess_mlmmj_mails!</span>
+  <span class="ruby-ivar">@sorted_target</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@sorted_target</span>.<span class="ruby-identifier">directory?</span>
+
+  <span class="ruby-ivar">@mutex</span>.<span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-ivar">@mailinglists</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">hsh</span> = <span class="ruby-identifier">collect_messages</span>(<span class="ruby-identifier">path</span> <span class="ruby-operator">+</span> <span class="ruby-constant">ARCHIVE_DIR</span>)
+      <span class="ruby-identifier">split_messages_into_month_dirs</span>(<span class="ruby-identifier">hsh</span>, <span class="ruby-ivar">@sorted_target</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">basename</span>) <span class="ruby-comment"># path.basename is the ML name</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- preprocess_mlmmj_mails-21-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- preprocess_mlmmj_mails-21-method -->
+
+    
+      <div id="method-i-search" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search</span><span
+            class="method-args">(mlname, query)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Search the given mailinglist for a specific search term. Return value is an
+array of paths relative to the HTML directory of the given ML.
+<code>query</code> may be a regular expression or simply a string to check
+for.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="search-source">
+            <pre><span class="ruby-comment"># File lib/mlmmj-archiver/archiver.rb, line 186</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search</span>(<span class="ruby-identifier">mlname</span>, <span class="ruby-identifier">query</span>)
+  <span class="ruby-identifier">html_dir</span> = <span class="ruby-ivar">@target_dir</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">mlname</span>
+
+  <span class="ruby-identifier">results</span> = []
+  <span class="ruby-identifier">html_dir</span>.<span class="ruby-identifier">find</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">file?</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">basename</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^\d+\.html$/</span>
+
+    <span class="ruby-comment"># Check if the file content matches</span>
+    <span class="ruby-identifier">content</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Regexp</span>)
+      <span class="ruby-identifier">result</span> = <span class="ruby-identifier">content</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">query</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">result</span> = <span class="ruby-identifier">content</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">query</span>.<span class="ruby-identifier">downcase</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># If it did, remember it for returning</span>
+    <span class="ruby-identifier">results</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">relative_path_from</span>(<span class="ruby-identifier">html_dir</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">result</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">results</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- search-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- search-method -->
+
+    
+      <div id="method-i-stop_watching_mlmmj_mails-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">stop_watching_mlmmj_mails!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Terminate the watching thread started by watch_mlmmj_mails.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="stop_watching_mlmmj_mails-21-source">
+            <pre><span class="ruby-comment"># File lib/mlmmj-archiver/archiver.rb, line 151</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">stop_watching_mlmmj_mails!</span>
+  <span class="ruby-ivar">@inotify_thread</span>.<span class="ruby-identifier">terminate</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- stop_watching_mlmmj_mails-21-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- stop_watching_mlmmj_mails-21-method -->
+
+    
+      <div id="method-i-watch_mlmmj_mails-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">watch_mlmmj_mails!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The more elegant variant of preprocess_mlmmj_mails. Instead of polling all
+mails and testing whether they are there, use inotify to have Linux notify
+us when a new file is added to the ML directory. For this method to work
+<code>rb-inotify</code> must be available on your system (otherwise you get
+a NotImplementedError).</p>
+          
+          
+
+          
+          <div class="method-source-code" id="watch_mlmmj_mails-21-source">
+            <pre><span class="ruby-comment"># File lib/mlmmj-archiver/archiver.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">watch_mlmmj_mails!</span>
+  <span class="ruby-identifier">raise</span>(<span class="ruby-constant">NotImplementedError</span>, <span class="ruby-string">&quot;This is only possible with rb-inotify!&quot;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-constant">INotify</span>)
+
+  <span class="ruby-ivar">@inotifier</span> = <span class="ruby-constant">INotify</span><span class="ruby-operator">::</span><span class="ruby-constant">Notifier</span>.<span class="ruby-identifier">new</span>
+
+  <span class="ruby-ivar">@mailinglists</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">archive_dir</span> = <span class="ruby-identifier">path</span> <span class="ruby-operator">+</span> <span class="ruby-constant">ARCHIVE_DIR</span>
+
+    <span class="ruby-ivar">@inotifier</span>.<span class="ruby-identifier">watch</span>(<span class="ruby-identifier">archive_dir</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-value">:create</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">event</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">file?</span>(<span class="ruby-identifier">event</span>.<span class="ruby-identifier">absolute_name</span>)
+      <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">event</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^\d+$/</span>
+
+      <span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Got a new mail: #{event.name}&quot;</span>
+      <span class="ruby-identifier">sleep</span> <span class="ruby-value">2</span> <span class="ruby-comment"># Wait for the file to be fully written</span>
+
+      <span class="ruby-ivar">@mutex</span>.<span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+        <span class="ruby-identifier">mail</span> = <span class="ruby-constant">Mail</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">event</span>.<span class="ruby-identifier">absolute_name</span>)
+        <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">cp</span>(<span class="ruby-identifier">event</span>.<span class="ruby-identifier">absolute_name</span>, <span class="ruby-ivar">@sorted_target</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">basename</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">mail</span>.<span class="ruby-identifier">date</span>.<span class="ruby-identifier">year</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">mail</span>.<span class="ruby-identifier">date</span>.<span class="ruby-identifier">month</span>.<span class="ruby-identifier">to_s</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">debug</span> <span class="ruby-string">&quot;Watching MLs via inotify.&quot;</span>
+  <span class="ruby-ivar">@inotify_thread</span> = <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">new</span>{<span class="ruby-ivar">@inotifier</span>.<span class="ruby-identifier">run</span>}
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- watch_mlmmj_mails-21-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- watch_mlmmj_mails-21-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.0.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
