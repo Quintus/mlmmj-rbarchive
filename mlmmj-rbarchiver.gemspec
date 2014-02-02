@@ -3,7 +3,7 @@ load "lib/mlmmj-archiver/version.rb"
 
 GEMSPEC = Gem::Specification.new do |s|
   s.name = "mlmmj-rbarchiver"
-  s.version = MlmmjArchiver::VERSION.dup
+  s.version = MlmmjArchiver::VERSION.gsub("-", ".")
   s.platform = Gem::Platform::RUBY
   s.required_ruby_version = ">= 2.0.0"
 
@@ -25,7 +25,8 @@ archive mailinglists programmatically.
 
   s.files = Dir["bin/*"] +
     Dir["data/*"] +
-    ["extra/archive.css", "extra/rbarchiver.conf", "extra/man/mlmmj-rbarchiver.1"] +
+    Dir["man/*"] +
+    ["extra/archive.css", "extra/rbarchiver.conf"] +
     Dir["lib/**/*.rb"] +
     ["README.md", "COPYING"]
   s.executables = ["mlmmj-rbarchiver"]
