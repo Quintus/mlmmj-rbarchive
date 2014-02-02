@@ -3,10 +3,9 @@ require "rake/clean"
 require "rubygems/package_task"
 require "rdoc/task"
 
-file "extra/man/mlmmj-rbarchiver.1" => "extra/man/mlmmj-rbarchiver.1.ronn" do
-  cd "extra/man" do
-    sh "ronn -r --manual='General Commands Manual' --organization='mlmmj' mlmmj-rbarchiver.1.ronn"
-  end
+file "man/mlmmj-rbarchiver.1" => "extra/man-source/mlmmj-rbarchiver.1.ronn" do
+  sh "ronn -r --manual='General Commands Manual' --organization='mlmmj' extra/man-source/mlmmj-rbarchiver.1.ronn"
+  mv "extra/man-source/mlmmj-rbarchiver.1", "man"
 end
 
 load "mlmmj-rbarchiver.gemspec"
@@ -18,4 +17,4 @@ RDoc::Task.new do |rt|
 end
 
 desc "Generate the manpages"
-task :man => "extra/man/mlmmj-rbarchiver.1"
+task :man => "man/mlmmj-rbarchiver.1"
