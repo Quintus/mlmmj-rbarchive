@@ -1,5 +1,5 @@
-mlmmj-rbarchive
-===============
+mlmmj-rbarchiver
+================
 
 Small Ruby program for properly archiving a mlmmj-managed
 mailinglist.
@@ -18,7 +18,7 @@ special watching method available for you (see below).
 Installation
 ------------
 
-mlmmj-rbarchive is available from RubyGems. Install it as usual:
+mlmmj-rbarchiver is available from RubyGems. Install it as usual:
 
 ```
 $ gem install mlmmj-rbarchiver.gem
@@ -36,7 +36,7 @@ $ gem install pkg/mlmmj-rbarchiver-*.gem
 Usage
 -----
 
-You can choose between using mlmmj-rbarchive as a library or as a
+You can choose between using mlmmj-rbarchiver as a library or as a
 commandline program.
 
 ### Commandline ###
@@ -148,7 +148,7 @@ Links
 License
 -------
 
-mlmmj-rbarchive makes a web archive from your mlmmj-archive.
+mlmmj-rbarchiver makes a web archive from your mlmmj-archive.
 Copyright (C) 2013-2014  Marvin Gülker
 
 This program is free software: you can redistribute it and/or modify
