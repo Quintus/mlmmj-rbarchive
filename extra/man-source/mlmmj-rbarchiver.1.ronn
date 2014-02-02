@@ -3,7 +3,7 @@ mlmmj-rbarchiver(1) -- Convert mlmmj MLs to an HTML archive
 
 ## SYNPOSIS
 
-`mlmmj-rbarchive -i INDIR -o OUTDIR` [OPTIONS]
+`mlmmj-rbarchiver -i INDIR -o OUTDIR` [OPTIONS]
 
 ## DESCRIPTION
 
@@ -114,7 +114,7 @@ Suppose you want to process the mlmmj mailinglist at
 `/var/spool/mlmmj/mymailinglist` and output the HTML to the directory
 `/var/www/mailarchive/mymailinglist`. This can be achieved as follows:
 
-    $ mlmmj-rbarchive -i /var/spool/mlmmj/mymailinglist -o /var/www/mailarchive
+    $ mlmmj-rbarchiver -i /var/spool/mlmmj/mymailinglist -o /var/www/mailarchive
 
 Note you don’t have to specify the ML subdirectory, this is created
 automatically for you.
@@ -129,7 +129,7 @@ website. That file will be left alone by `mlmmj-rbarchive`.
 An example cron(8) entry for periodically running that command could
 look like this:
 
-    0 2 * * * mlmmj-rbarchive -i /var/spool/mymailinglist -o /var/www/mailarchive
+    0 2 * * * mlmmj-rbarchiver -i /var/spool/mymailinglist -o /var/www/mailarchive
 
 That would run the shown command every day at 02:00 in the night.
 
