@@ -50,11 +50,13 @@
     <ul>
       <li><a href="#label-mlmmj-rbarchive">mlmmj-rbarchive</a>
       <li><a href="#label-Requirements">Requirements</a>
+      <li><a href="#label-Installation">Installation</a>
       <li><a href="#label-Usage">Usage</a>
       <li><a href="#label-Commandline">Commandline</a>
       <li><a href="#label-Library">Library</a>
       <li><a href="#label-I+want+more+output%21">I want more output!</a>
       <li><a href="#label-Docs%3F">Docs?</a>
+      <li><a href="#label-Links">Links</a>
       <li><a href="#label-License">License</a>
     </ul>
   </nav>
@@ -66,6 +68,8 @@
   <h3 class="section-header">Pages</h3>
 
   <ul>
+  
+    <li class="file"><a href="./CHANGELOG_rdoc.html">CHANGELOG</a>
   
     <li class="file"><a href="./COPYING.html">COPYING</a>
   
@@ -106,6 +110,23 @@ mailinglist.</p>
 </li><li>
 <p>The <code>paint</code> gem</p>
 </li></ul>
+
+<p>Optionally, you can install the <code>rb-inotify</code> gem. This will make
+a
+special watching method available for you (see below).</p>
+
+<h2 id="label-Installation">Installation<span><a href="#label-Installation">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<p>mlmmj-rbarchive is available from RubyGems. Install it as usual:</p>
+
+<pre>$ gem install mlmmj-rbarchiver.gem</pre>
+
+<p>Alternatively, you can build the very latest code from Git:</p>
+
+<pre>$ git clone git://github.com/Quintus/mlmmj-rbarchive.git
+$ cd mlmmj-rbarchive
+$ rake gem
+$ gem install pkg/mlmmj-rbarchiver-*.gem</pre>
 
 <h2 id="label-Usage">Usage<span><a href="#label-Usage">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
@@ -166,8 +187,8 @@ directory <code>output</code> below the current directory. To actually
 add
 an mlmmj ML do the following:</p>
 
-<pre class="ruby"><span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;/var/spool/mlmmj/my-ml
-</span></pre>
+<pre class="ruby"><span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;/var/spool/mlmmj/my-ml&quot;</span>
+</pre>
 
 <p>Note you don’t have to specify the “archive” directory below
 <code>my-ml</code>
@@ -188,26 +209,23 @@ already nicely sorted:</p>
 <pre class="ruby"><span class="ruby-identifier">a</span>.<span class="ruby-identifier">preprocess_mlmmj_mails!</span>
 </pre>
 
-<p>After having prepared all existing mail, you can now watch the
-ML’s
-<code>archive</code> directories for changes rather than running
-the
-Archiver#preprocess_mlmmj_mails! method periodically:</p>
+<p>You have to rerun this method each time you want to update the HTML
+mail
+archive. If you have the <code>rb-inotify</code> gem installed however,
+you
+can leverage Linux’ <em>inotify</em> utility and watch the MLs’
+directories for
+mails instead:</p>
 
 <pre class="ruby"><span class="ruby-identifier">a</span>.<span class="ruby-identifier">watch_mlmmj_mails!</span>
 </pre>
 
-<p>Note that the above only works if you have the <code>rb-inotify</code>
-gem
-installed. Finally, start the conversion process:</p>
+<p>This will reprocess the mailinglist as new messages arrive.</p>
+
+<p>Finally, start the conversion process:</p>
 
 <pre class="ruby"><span class="ruby-identifier">a</span>.<span class="ruby-identifier">archive!</span>
 </pre>
-
-<p>You can run this periodically if you want, already processed
-messages will
-not be processed again, only new messages are
-added to the web archive.</p>
 
 <h4 id="label-I+want+more+output%21">I want more output!<span><a href="#label-I+want+more+output%21">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
 
@@ -221,11 +239,25 @@ archiver:</p>
 
 <p>To get a more thorough documentation, run this:</p>
 
-<pre>$ rdoc archiver.rb</pre>
+<pre>$ rake docs</pre>
 
 <p>You will then end up with some more detailed docs in a directory
-<code>doc</code>
+<code>html</code>
 below the current working directory.</p>
+
+<h2 id="label-Links">Links<span><a href="#label-Links">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<ul><li>
+<p><a href="http://quintus.github.io/mlmmj-rbarchive">Online docs</a></p>
+</li><li>
+<p><a
+href="http://quintus.github.io/mlmmj-rbarchive/man/mlmmj-rbarchiver.1.html">Online
+manpage</a></p>
+</li><li>
+<p><a href="https://github.com/Quintus/mlmmj-rbarchive">Repository</a></p>
+</li><li>
+<p><a href="https://github.com/Quintus/mlmmj-rbarchive/issues">Issue
+tracker</a></p>
+</li></ul>
 
 <h2 id="label-License">License<span><a href="#label-License">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
@@ -260,6 +292,8 @@ which can be found here: <a
 href="http://git.cryptomilk.org/projects/mlmmj-webarchiver.git">git.cryptomilk.org/projects/mlmmj-webarchiver.git</a>.
 It
 is GPL-copyrighted free software, hence this is also GPL’ed free software.</p>
+
+<p>You can contact me at quintus ät quintilianus döt eu.</p>
 
 </div>
 

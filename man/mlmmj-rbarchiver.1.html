@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='content-type' content='text/html; charset=UTF-8'>
+  <meta name='generator' value='Ronn/v0.7.3 (http://github.com/rtomayko/ronn/tree/0.7.3)'>
+  <title>mlmmj-rbarchiver(1) - Convert mlmmj MLs to an HTML archive</title>
+  <style type='text/css' media='all'>
+  /* style: man */
+  body#manpage {margin:0}
+  .mp {max-width:100ex;padding:0 9ex 1ex 4ex}
+  .mp p,.mp pre,.mp ul,.mp ol,.mp dl {margin:0 0 20px 0}
+  .mp h2 {margin:10px 0 0 0}
+  .mp > p,.mp > pre,.mp > ul,.mp > ol,.mp > dl {margin-left:8ex}
+  .mp h3 {margin:0 0 0 4ex}
+  .mp dt {margin:0;clear:left}
+  .mp dt.flush {float:left;width:8ex}
+  .mp dd {margin:0 0 0 9ex}
+  .mp h1,.mp h2,.mp h3,.mp h4 {clear:left}
+  .mp pre {margin-bottom:20px}
+  .mp pre+h2,.mp pre+h3 {margin-top:22px}
+  .mp h2+pre,.mp h3+pre {margin-top:5px}
+  .mp img {display:block;margin:auto}
+  .mp h1.man-title {display:none}
+  .mp,.mp code,.mp pre,.mp tt,.mp kbd,.mp samp,.mp h3,.mp h4 {font-family:monospace;font-size:14px;line-height:1.42857142857143}
+  .mp h2 {font-size:16px;line-height:1.25}
+  .mp h1 {font-size:20px;line-height:2}
+  .mp {text-align:justify;background:#fff}
+  .mp,.mp code,.mp pre,.mp pre code,.mp tt,.mp kbd,.mp samp {color:#131211}
+  .mp h1,.mp h2,.mp h3,.mp h4 {color:#030201}
+  .mp u {text-decoration:underline}
+  .mp code,.mp strong,.mp b {font-weight:bold;color:#131211}
+  .mp em,.mp var {font-style:italic;color:#232221;text-decoration:none}
+  .mp a,.mp a:link,.mp a:hover,.mp a code,.mp a pre,.mp a tt,.mp a kbd,.mp a samp {color:#0000ff}
+  .mp b.man-ref {font-weight:normal;color:#434241}
+  .mp pre {padding:0 4ex}
+  .mp pre code {font-weight:normal;color:#434241}
+  .mp h2+pre,h3+pre {padding-left:0}
+  ol.man-decor,ol.man-decor li {margin:3px 0 10px 0;padding:0;float:left;width:33%;list-style-type:none;text-transform:uppercase;color:#999;letter-spacing:1px}
+  ol.man-decor {width:100%}
+  ol.man-decor li.tl {text-align:left}
+  ol.man-decor li.tc {text-align:center;letter-spacing:4px}
+  ol.man-decor li.tr {text-align:right;float:right}
+  </style>
+</head>
+<!--
+  The following styles are deprecated and will be removed at some point:
+  div#man, div#man ol.man, div#man ol.head, div#man ol.man.
+
+  The .man-page, .man-decor, .man-head, .man-foot, .man-title, and
+  .man-navigation should be used instead.
+-->
+<body id='manpage'>
+  <div class='mp' id='man'>
+
+  <div class='man-navigation' style='display:none'>
+    <a href="#NAME">NAME</a>
+    <a href="#SYNPOSIS">SYNPOSIS</a>
+    <a href="#DESCRIPTION">DESCRIPTION</a>
+    <a href="#USAGE">USAGE</a>
+    <a href="#OPTIONS">OPTIONS</a>
+    <a href="#CONFIGURATION-FILE">CONFIGURATION FILE</a>
+    <a href="#EXAMPLE">EXAMPLE</a>
+    <a href="#AUTHOR">AUTHOR</a>
+    <a href="#SEE-ALSO">SEE ALSO</a>
+  </div>
+
+  <ol class='man-decor man-head man head'>
+    <li class='tl'>mlmmj-rbarchiver(1)</li>
+    <li class='tc'>General Commands Manual</li>
+    <li class='tr'>mlmmj-rbarchiver(1)</li>
+  </ol>
+
+  <h2 id="NAME">NAME</h2>
+<p class="man-name">
+  <code>mlmmj-rbarchiver</code> - <span class="man-whatis">Convert mlmmj MLs to an HTML archive</span>
+</p>
+
+<h2 id="SYNPOSIS">SYNPOSIS</h2>
+
+<p><code>mlmmj-rbarchive -i INDIR -o OUTDIR</code> <a href="#OPTIONS" title="OPTIONS" data-bare-link="true">OPTIONS</a></p>
+
+<h2 id="DESCRIPTION">DESCRIPTION</h2>
+
+<p><code>mlmmj-rbarchive</code> converts an mlmmj mailinglist into a browsable HTML
+archive. You can point your webserver to the resulting directory and
+thereby serve it as a (public) webarchive for the mailinglist.</p>
+
+<h2 id="USAGE">USAGE</h2>
+
+<p>The <code>-i</code> and <code>-o</code> options are required and the program will abort if
+any of them is missing. The former specifies the root directory of the
+mlmmj mailinglist you want to process, whereas the latter specifies
+the directory the HTML will be outputted to. To be exact, the program
+will take the <code>archive/</code> subdirectory of the input directory for
+processing and will output to a directory named after the processed ML
+below the output directory.</p>
+
+<h2 id="OPTIONS">OPTIONS</h2>
+
+<dl>
+<dt><code>-a EMAIL</code>, <code>--admin EMAIL</code></dt><dd><p>Administrative Email contact.</p></dd>
+<dt><code>-c FILE</code>, <code>--config-file FILE</code></dt><dd><p>Configuration file to read options from. See below for
+more information on this.</p></dd>
+<dt><code>-C DIR</code>, <code>--cachedir DIR</code></dt><dd><p>Cache directory for storing the sorted emails. Usually this
+is set automatically to some temporary directory, but you
+can set this to a permanent directory if you want. This will
+cause the program to not regenerate the entire ML archive, but
+instead use what can be found in that cache directory, resulting
+in a faster processing, especially if the mailinglist in question
+is large.</p></dd>
+<dt><code>-h</code>, <code>--help</code></dt><dd><p>Display a short option summary.</p></dd>
+<dt><code>-H HTML</code>, <code>--header HTML</code></dt><dd><p>A short HTML snippet placed at the top of each page.
+Set this to something like <code>&lt;p&gt;My Mailinglist archive&lt;/p&gt;</code>.</p></dd>
+<dt><code>-i DIR</code>, <code>--indir DIR</code></dt><dd><p>The mlmmj mailinglist to process. <em>Required</em>.</p></dd>
+<dt><code>-l</code>, <code>--levels NUM</code></dt><dd><p>Maximum indentation level before the threads are flattened.</p></dd>
+<dt><code>-m BINARY</code>, <code>--mhonarc BINARY</code></dt><dd><p>Path to the <span class="man-ref">mhonarc<span class="s">(1)</span></span> executable. Usually this is found out
+automatically.</p></dd>
+<dt><code>-o DIR</code>, <code>--outdir DIR</code></dt><dd><p>The target directory for the HTML files. <em>Required</em>.</p></dd>
+<dt><code>-s</code>, <code>--style STRING</code></dt><dd><p>CSS link to include in each HTML files’ <code>&lt;head&gt;</code> section.
+This is copied as-is, you have to provide the CSS file
+yourself.</p></dd>
+<dt><code>-S</code>, <code>--search URL</code></dt><dd><p>Add a link called "search" to the navigation bar that links
+to the URL specified here. Nothing more is done, you have to
+implement the target yourself.</p></dd>
+<dt><code>-v</code>, <code>--version</code></dt><dd><p>Print the version number and exit.</p></dd>
+<dt><code>-V</code>, <code>--verbose</code></dt><dd><p>Give more information while processing.</p></dd>
+<dt><code>-x</code>, <code>--no-checknoarchive</code></dt><dd><p>Do <em>not</em> check the <code>X-NoArchive</code> email header that instructs
+archiving software to ignore an email. Note that the default
+behaviour is to honour that header.</p></dd>
+</dl>
+
+
+<h2 id="CONFIGURATION-FILE">CONFIGURATION FILE</h2>
+
+<p>The <code>-c</code> option allows you to specify a configuration file so you
+don’t have to pass all the above commandline options again and
+again. Instead you can set them in the file and have the program read
+that file on startup. Most things specifyable via the commandline can
+be set in the config file too, so I encourage you to use such a file
+to keep your commands clean. The mapping of the configuration file
+directives to the above commandline options is as follows:</p>
+
+<pre><code>┌────────────────┬────────┐
+│ Directive      │ Option │
+├────────────────┼────────┤
+│ archiveadmin   │ -a     │
+│ cachedir       │ -c     │
+│ checknoarchive │ -x     │
+│ header         │ -H     │
+│ indir          │ -i     │
+│ mhonarc        │ -m     │
+│ outdir         │ -o     │
+│ tlevels        │ -l     │
+│ searchtarget   │ -S     │
+│ stylefile      │ -s     │
+└────────────────┴────────┘
+</code></pre>
+
+<p>See the example configuration file provided in the <code>extra/</code> directory
+in the source for concrete usage instructions.</p>
+
+<h2 id="EXAMPLE">EXAMPLE</h2>
+
+<p>Suppose you want to process the mlmmj mailinglist at
+<code>/var/spool/mlmmj/mymailinglist</code> and output the HTML to the directory
+<code>/var/www/mailarchive/mymailinglist</code>. This can be achieved as follows:</p>
+
+<pre><code>$ mlmmj-rbarchive -i /var/spool/mlmmj/mymailinglist -o /var/www/mailarchive
+</code></pre>
+
+<p>Note you don’t have to specify the ML subdirectory, this is created
+automatically for you.</p>
+
+<p>The resulting directory <code>/var/www/mailarchive/mymailinglist</code> will
+contain all messages sent to the ML converted to HTML. Note this does
+<em>not</em> create a toplevel <code>index.html</code> file for you, so you probably
+want to create one that contains information about how to
+subscribe/unsubscribe from the mailinglists archived at the
+website. That file will be left alone by <code>mlmmj-rbarchive</code>.</p>
+
+<p>An example <span class="man-ref">cron<span class="s">(8)</span></span> entry for periodically running that command could
+look like this:</p>
+
+<pre><code>0 2 * * * mlmmj-rbarchive -i /var/spool/mymailinglist -o /var/www/mailarchive
+</code></pre>
+
+<p>That would run the shown command every day at 02:00 in the night.</p>
+
+<h2 id="AUTHOR">AUTHOR</h2>
+
+<p>Marvin Gülker <code>&lt;quintus@quintilianus.eu&gt;</code></p>
+
+<h2 id="SEE-ALSO">SEE ALSO</h2>
+
+<p>mlmmj website (<a href="http://www.mlmmj.org" data-bare-link="true">http://www.mlmmj.org</a>), project page
+(<a href="https://github.com/Quintus/mlmmj-rbarchive" data-bare-link="true">https://github.com/Quintus/mlmmj-rbarchive</a>)</p>
+
+
+  <ol class='man-decor man-foot man foot'>
+    <li class='tl'>mlmmj</li>
+    <li class='tc'>February 2014</li>
+    <li class='tr'>mlmmj-rbarchiver(1)</li>
+  </ol>
+
+  </div>
+</body>
+</html>
