@@ -1,0 +1,11 @@
+= Changelog
+
+== Version 0.0.2
+
+* Made manpage findable for the
+  gem-man[https://github.com/defunkt/gem-man] gem.
+* Add manpage to online documentation
+
+== Version 0.0.1 (2014-02-01)
+
+* Initial release

@@ -26,7 +26,7 @@ load "mlmmj-rbarchiver.gemspec"
 Gem::PackageTask.new(GEMSPEC).define
 
 RDoc::Task.new do |rt|
-  rt.rdoc_files.include("README.md", "COPYING", "lib/**/*.rb")
+  rt.rdoc_files.include("README.md", "COPYING", "*.rdoc", "lib/**/*.rb")
   rt.main = "README.md"
 end
 

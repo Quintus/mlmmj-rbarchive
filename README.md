@@ -131,18 +131,19 @@ Docs?
 To get a more thorough documentation, run this:
 
 ```
-$ rdoc archiver.rb
+$ rake docs
 ```
 
-You will then end up with some more detailed docs in a directory `doc`
+You will then end up with some more detailed docs in a directory `html`
 below the current working directory.
 
 Links
 -----
 
-* [Online docs](http://quintus.github.io/mlmmj-rbarchiver)
-* [Repository](https://github.com/Quintus/mlmmj-rbarchiver)
-* [Issue tracker](https://github.com/Quintus/mlmmj-rbarchiver/issues)
+* [Online docs](http://quintus.github.io/mlmmj-rbarchive)
+* [Online manpage](http://quintus.github.io/mlmmj-rbarchive/man/mlmmj-rbarchiver.1.html)
+* [Repository](https://github.com/Quintus/mlmmj-rbarchive)
+* [Issue tracker](https://github.com/Quintus/mlmmj-rbarchive/issues)
 
 License
 -------
